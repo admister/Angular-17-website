@@ -9,4 +9,11 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
+  header = {
+    title: "A FREE AND SIMPLE LANDING PAGE",
+    description: "A FREE AND SIMPLE LANDING PAGE",
+    url:"Namari is a free landing page template you can use for your projects. It is free to use for your\npersonal and commercial projects enjoy!",
+    buttontext:"START CREATING TODAY"
+  }
+
 }
