@@ -4,10 +4,10 @@
     <div class="row clearfix">
 
         <div class="section-heading">
-            <h3>{{testimonials.title}}</h3>
-            <h2 class="section-title">{{testimonials.description}}</h2>
+            <h3>{{testimonials?.data?.title}}</h3>
+            <h2 class="section-title">{{testimonials?.data?.description}}</h2>
         </div>
-        @for (feedback of testimonials.feedbacks; track feedback) {
+        @for (feedback of testimonials?.data?.feedbackBlock; track feedback) {
         <!--User Testimonial-->
         <blockquote class="col-3 testimonial classic">
             <img src="{{feedback.userimage}}" alt="User"/>

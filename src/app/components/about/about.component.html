@@ -4,14 +4,14 @@
     <div class="row clearfix">
 
         <div class="col-3">
-                <h3>{{about.title}}</h3>
-                <h2 class="section-title">{{about.description}}</h2>
-                <p class="section-subtitle">{{about.detail}}</p>
+                <h3>{{about?.data?.title}}</h3>
+                <h2 class="section-title">{{about?.data?.description}}</h2>
+                <p class="section-subtitle">{{about?.data?.detail}}</p>
         </div>
 
         <div class="col-2-3">
 
-        @for (iconBlock of about.IconBlocks; track iconBlock) {
+        @for (iconBlock of about?.data?.iconBlocks; track iconBlock) {
             <!--Icon Block-->
             <div class="col-2 icon-block icon-top wow fadeInUp" data-wow-delay="0.1s">
                 <!--Icon-->
