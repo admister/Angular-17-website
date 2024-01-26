@@ -1,10 +1,17 @@
 import { Injectable } from '@angular/core';
 import { ConfigItem } from './config-item';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, of, filter } from 'rxjs';
+
+const httpOptions = {
+  'headers': new HttpHeaders({'Content-type': 'application/json'})
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConfigService {
+apiUrl = "http://localhost:3000/configuration";
 
 configuration : ConfigItem[] = [
   {id: 1,
@@ -192,13 +199,35 @@ configuration : ConfigItem[] = [
   }
 ];
 
-  constructor() { }
 
-  getAllPages(): ConfigItem[] {
-    return this.configuration;
+  constructor(private http: HttpClient) { }
+
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+      // TODO: better job of transforming error for user consumption
+      console.log(`${operation} failed: ${error.message}`);
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
 
-  getPageByName(pageName: string): ConfigItem | undefined {
-    return this.configuration.find((configItem) => configItem.name === pageName);
+  getAllPages(): Observable<ConfigItem[]> {
+    // return this.configuration;
+    return this.http.get<ConfigItem[]>(this.apiUrl) ?? {};
+  }
+
+  getPageById(id: number): Observable<ConfigItem> {
+    // return this.configuration;
+    return this.http.get<ConfigItem>(`${this.apiUrl}/${id}`) ?? {};
+  }
+
+  getPageByName(pageName: string): Observable<ConfigItem> {
+    // return this.configuration.find((configItem) => configItem.name === pageName);
+    return this.http.get<ConfigItem>(this.apiUrl).pipe(
+      filter((configItem) => configItem.name === pageName)
+    )
   }
 }

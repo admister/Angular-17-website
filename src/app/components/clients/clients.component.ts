@@ -14,6 +14,9 @@ export class ClientsComponent {
   configService: ConfigService = inject(ConfigService);
 
   constructor()  {
-    this.clients = this.configService.getPageByName("clients");
+    // this.clients = this.configService.getPageByName("clients");
+    this.configService.getPageById(2).subscribe(
+      (response) => this.clients = response
+      );
   }
 }
